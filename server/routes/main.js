@@ -1,7 +1,6 @@
 const router = require('express').Router();
+const controllers = require('../../controllers/blogControllers');
 
-router.get('', (req, res) => {
-	res.send('Hello World');
-});
+router.get('', controllers.get_blog);
 
 module.exports = router;
