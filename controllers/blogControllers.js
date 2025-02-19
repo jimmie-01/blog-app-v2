@@ -22,7 +22,7 @@ module.exports.get_blog = async (req, res) => {
 		.limit(perPage)
 		.exec();
 
-		const count = await Post.count();
+		const count = await Post.countDocuments({});
 		const nextPage = parseInt(page) + 1;
 		const hasNextPage = nextPage <= Math.ceil(count / perPage);
 
@@ -36,6 +36,18 @@ module.exports.get_blog = async (req, res) => {
 		console.log(error);
 	}
 };
+
+/**
+ * GET /
+ * Post
+ */
+
+module.exports.get_post = async(req, res) => {
+	const locals = {
+		title: "Nodejs Blog",
+		description: "Simple Blog created with Nodejs, Express and MongoDB"
+	}
+}
 
 module.exports.get_about = (req, res) => {
 	res.render('about');
