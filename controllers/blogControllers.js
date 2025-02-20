@@ -43,10 +43,19 @@ module.exports.get_blog = async (req, res) => {
  */
 
 module.exports.get_post = async(req, res) => {
-	const locals = {
-		title: "Nodejs Blog",
-		description: "Simple Blog created with Nodejs, Express and MongoDB"
+	try {
+		const locals = {
+			title: "Nodejs Blog",
+			description: "Simple Blog created with Nodejs, Express and MongoDB"
+		}
+		const id = req.params.id
+		const post = await Post.findById({ _id: id });
+		res.render('', { locals, post });
+
+	} catch (err) {
+		console.log(err);
 	}
+	
 }
 
 module.exports.get_about = (req, res) => {
