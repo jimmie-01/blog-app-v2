@@ -50,7 +50,7 @@ module.exports.get_post = async(req, res) => {
 		}
 		const id = req.params.id
 		const post = await Post.findById({ _id: id });
-		res.render('', { locals, post });
+		res.render('post', { locals, post });
 
 	} catch (err) {
 		console.log(err);
