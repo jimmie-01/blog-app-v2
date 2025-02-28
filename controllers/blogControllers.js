@@ -39,24 +39,42 @@ module.exports.get_blog = async (req, res) => {
 
 /**
  * GET /
- * Post
+ * Post - post 
  */
 
 module.exports.get_post = async(req, res) => {
 	try {
-		const locals = {
-			title: "Nodejs Blog",
-			description: "Simple Blog created with Nodejs, Express and MongoDB"
-		}
 		const id = req.params.id
 		const post = await Post.findById({ _id: id });
+		const locals = {
+			title: post.title,
+			description: "Simple Blog created with Nodejs, Express and MongoDB"
+		}
 		res.render('post', { locals, post });
-
 	} catch (err) {
 		console.log(err);
 	}
 	
 }
+
+/**
+ * POST /
+ * post - search term
+ */
+module.exports.post_search = (req, res) => {
+
+	try {
+		locals = {
+			title: "Search",
+			Description: "Simple Blog created with Nodejs, Express and MongoDB"
+		}
+	
+		res.render('search', { title })
+	} catch (error) {
+		console.log(error);
+	}
+}
+
 
 module.exports.get_about = (req, res) => {
 	res.render('about');
