@@ -12,6 +12,13 @@ document.addEventListener('DOMContentLoaded', function() {
 			searchBar.classList.add('open');
 			this.setAttribute('aria-expanded', 'true');
 			searchInput.focus();
-		})
-	}
+		});
+	};
+
+	searchClose.addEventListener('click', function() {
+		searchBar.style.visibility = 'hidden';
+		searchBar.classList.remove('open');
+		this.setAttribute('aria-expanded', 'false');
+
+	});
 });
