@@ -1,4 +1,4 @@
-const Post = require('../server/models/post');
+const Post = require('../server/models/Post');
 
 // ROUTES
 

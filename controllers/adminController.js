@@ -1,3 +1,4 @@
+const User = require('../server/models/User');
 
 const adminLayout = '../views/layouts/admin';
 /**
