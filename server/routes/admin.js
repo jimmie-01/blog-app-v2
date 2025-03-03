@@ -1,24 +1,6 @@
-const express = require('express').Router();
-const router = express();
-const Post = require('../models/post');
+const router = require('express').Router();
+const controllers = require('../../controllers/adminController'); 
 
-/**
- * GET
- * Admin - login Page
- */
-
-router.get('/admin', (req, res) => {
-	try {
-		locals = {
-			title: "Admin",
-			Description: "Simple Blog created with NodeJs, express & MongoDb"
-		}
-
-		res.render('admin/index', { locals });
-
-	} catch (error) {
-		console.log(error);
-	}
-})
+router.get('/admin', controllers.get_login);
 
 module.exports = router;
