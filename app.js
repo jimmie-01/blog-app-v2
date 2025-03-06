@@ -1,4 +1,7 @@
 const express = require('express');
+const bycrypt = require('bcrypt');
+const connectMongo = require('connect-mongo');
+const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
 
 const expressLayout = require('express-ejs-layouts');

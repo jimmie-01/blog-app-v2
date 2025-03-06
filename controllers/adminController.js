@@ -19,3 +19,12 @@ module.exports.get_login = (req, res) => {
 		console.log(error);
 	}
 };
+
+/**
+ * POST
+ * Admin - Check login
+ */
+
+module.exports.post_login = async(req, res) => {
+
+}
