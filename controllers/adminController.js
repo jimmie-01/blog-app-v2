@@ -13,7 +13,7 @@ module.exports.get_login = (req, res) => {
 			Description: "Simple Blog created with NodeJs, express & MongoDb"
 		}
 
-		res.render('admin/index', { locals, layout: adminLayout });
+		res.render('admin/login', { locals, layout: adminLayout });
 
 	} catch (error) {
 		console.log(error);
@@ -26,5 +26,13 @@ module.exports.get_login = (req, res) => {
  */
 
 module.exports.post_login = async(req, res) => {
-
-}
+	try {
+		const locals = {
+			title: "",
+			description: ""
+		}
+		const { email, password} = req.body
+	} catch (error) {
+		console.log(error);
+	};
+};

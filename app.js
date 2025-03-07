@@ -1,6 +1,6 @@
 const express = require('express');
 const bycrypt = require('bcrypt');
-const connectMongo = require('connect-mongo');
+const MongoStore = require('connect-mongo');
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
 
@@ -19,6 +19,7 @@ connectDB();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
+app.use(cookieParser());
 
 // Templating Engine
 app.use(expressLayout);
