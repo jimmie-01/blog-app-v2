@@ -1,5 +1,5 @@
 const express = require('express');
-const bycrypt = require('bcrypt');
+const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv');
@@ -20,6 +20,16 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static('public'));
 app.use(cookieParser());
+
+app.use(session({
+	secret: 'keyboard cat',
+	resave: false,
+	saveUnitialized: true,
+	store: MongoStore.create({
+		mongoUrl: process.env.MONGODB_URI
+	}),
+	//cookie: { maxAge: new Date(Date.now() + (3600000) ) }
+}));
 
 // Templating Engine
 app.use(expressLayout);
