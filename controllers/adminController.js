@@ -44,17 +44,14 @@ module.exports.post_login = async(req, res) => {
  * Admin - Register
  */
 
-module.exports.post_register = async(req, res) => {
+module.exports.post_register = async (req, res) => {
 	try {
-		const locals = {
-			title: "",
-			description: ""
-		}
-		const { email, password } = req.body;
+		
+		const { username, password } = req.body;
 		const hashedPassword = await bycrypt.hash(password, 10);
 
 		try {
-			const user = await User.create({ email, password: hashedPassword });
+			const user = await User.create({ username, password: hashedPassword });
 			res.status(201).json({ message: 'User created', user });
 		} catch (error) {
 			if(error.code === 11000) {
