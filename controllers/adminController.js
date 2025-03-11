@@ -53,9 +53,11 @@ module.exports.post_register = async (req, res) => {
 			const user = await User.create({ email, password: hashedPassword });
 			res.status(201).json({ message: "User created", user });
 		} catch (error) {
-			console.log(error);
+			if(error.code === 11000) {
+				res.status(409).json({ message: 'User Already in use'});
+			}
+			res.status(500).json({ message: 'Internal Server Error'});
 		}
-		console.log({ email, password: hashedPassword });
 	} catch (error) {
 		console.log(error);
 	}
