@@ -1,5 +1,5 @@
 const User = require('../server/models/User');
-const bycrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 const adminLayout = '../views/layouts/admin';
@@ -45,6 +45,9 @@ module.exports.post_login = async(req, res) => {
  */
 
 module.exports.post_register = async (req, res) => {
-	const { username, password} = req.body;
-	res.status(201).send({ username, password });
-}
+
+	const { email, password } = req.body;
+
+	console.log(req.body);
+
+};

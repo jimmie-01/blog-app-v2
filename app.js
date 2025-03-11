@@ -18,7 +18,6 @@ connectDB();
 // Middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(express.static('public'));
 app.use(cookieParser());
 
 app.use(session({
@@ -30,6 +29,8 @@ app.use(session({
 	}),
 	//cookie: { maxAge: new Date(Date.now() + (3600000) ) }
 }));
+
+app.use(express.static('public'));
 
 // Templating Engine
 app.use(expressLayout);
