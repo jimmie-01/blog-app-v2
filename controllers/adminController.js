@@ -30,11 +30,24 @@ module.exports.get_login = (req, res) => {
 
 module.exports.post_login = async(req, res) => {
 	try {
-		const locals = {
-			title: "",
-			description: ""
-		}
+
 		const { email, password} = req.body
+		const user = await User.findOne({ email });
+
+		if(!user){
+			return res.status(401).json({ message: 'Invalid Credentials' });
+		}
+
+		const isPasswordValid = await bcrypt.compare(password, user.password);
+
+		if(!isPasswordValid){
+			return res.status(401).json({ message: 'Invalid Credentials' });
+		}
+		
+		const token = jwt.sign({ userId: user._id}, process.env.JWT_SECRET);
+		res.cookie('blog_token', token, { httpOnly: true});
+		res.redirect('/dashboard');
+		
 	} catch (error) {
 		console.log(error);
 	};
