@@ -4,6 +4,30 @@ const e = require('express');
 const jwt = require('jsonwebtoken');
 
 const adminLayout = '../views/layouts/admin';
+
+
+/**
+ * 
+ * Check Login
+ */
+
+const authMiddleware = (req, res, next) => {
+	const token = req.cookies.token;
+
+	if(!token) {
+		return res.status(401).json({ message: 'Unauthorized' });
+	}
+
+	try {
+		const  decoded = jwt.verify(token, process.env.JWT_SECRE);
+		req.userId = decoded.userId;
+		next();
+	} catch (error) {
+		res.status(401).json({ message: 'Unauthorized' });
+	}
+};
+
+
 /**
  * GET
  * Admin - login Page
@@ -47,7 +71,7 @@ module.exports.post_login = async(req, res) => {
 		const token = jwt.sign({ userId: user._id}, process.env.JWT_SECRET);
 		res.cookie('blog_token', token, { httpOnly: true});
 		res.redirect('/dashboard');
-		
+
 	} catch (error) {
 		console.log(error);
 	};
@@ -75,3 +99,13 @@ module.exports.post_register = async (req, res) => {
 		console.log(error);
 	}
 };
+
+/**
+ * GET
+ * Admin - Dashboard
+ */
+
+module.exports.get_dashboard = (req, res) => {
+
+	res.render('admin/dashboard');
+}
