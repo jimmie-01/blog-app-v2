@@ -88,6 +88,15 @@ module.exports.post_search = async(req, res) => {
 	}
 };
 
+/**
+ * GET
+ * Admin - Dashboard
+ */
+
+module.exports.get_dashboard = (req, res) => {
+
+	res.render('admin/dashboard');
+}
 
 module.exports.get_about = (req, res) => {
 	res.render('about');

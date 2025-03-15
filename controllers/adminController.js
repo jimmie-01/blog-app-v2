@@ -99,13 +99,3 @@ module.exports.post_register = async (req, res) => {
 		console.log(error);
 	}
 };
-
-/**
- * GET
- * Admin - Dashboard
- */
-
-module.exports.get_dashboard = (req, res) => {
-
-	res.render('admin/dashboard');
-}
