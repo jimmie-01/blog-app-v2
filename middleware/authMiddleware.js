@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 /**
  * 
  * Check Login
@@ -20,4 +21,4 @@ const authMiddleware = (req, res, next) => {
 	}
 };
 
-module.exports = { authMiddleware }
+module.exports = authMiddleware;
