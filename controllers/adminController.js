@@ -1,7 +1,7 @@
 const User = require('../server/models/User');
 const bcrypt = require('bcrypt');
-const e = require('express');
 const jwt = require('jsonwebtoken');
+const Post = require('../server/models/Post');
 
 const adminLayout = '../views/layouts/admin';
 
@@ -34,8 +34,9 @@ module.exports.get_login = (req, res) => {
 module.exports.post_login = async(req, res) => {
 	try {
 
-		const { email, password} = req.body
+		const { email, password } = req.body
 		const user = await User.findOne({ email });
+		console.log({user});
 
 		if(!user){
 			return res.status(401).json({ message: 'Invalid Credentials' });
@@ -78,3 +79,24 @@ module.exports.post_register = async (req, res) => {
 		console.log(error);
 	}
 };
+
+/**
+ * GET
+ * Admin - Dashboard
+ */
+
+module.exports.get_dashboard = async(req, res) => {
+	try {
+		const locals = {
+			title: "Dashboard",
+			description: "Simple Blog created with NodeJs, express & MongoDb"
+		}
+		const data = await Post.find();
+		res.render('admin/dashboard', {
+			locals,
+			data
+		});
+	} catch(error) {
+
+	}
+}
