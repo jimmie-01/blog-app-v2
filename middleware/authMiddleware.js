@@ -9,7 +9,7 @@ const authMiddleware = (req, res, next) => {
 	const token = req.cookies.token;
 
 	if(!token) {
-		res.status(401).json({ message: 'Unauthorized' });
+		return res.status(401).json({ message: 'Unauthorized' });
 	}
 
 	try {
@@ -17,7 +17,7 @@ const authMiddleware = (req, res, next) => {
 		req.userId = decoded.userId;
 		next();
 	} catch (error) {
-		res.render('admin/login');
+		return res.render('admin/login');
 	}
 };
 
