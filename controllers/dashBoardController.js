@@ -63,3 +63,44 @@ module.exports.post_add_post = async(req, res) => {
 		console.log(error);
 	}
 };
+
+/**
+ * GET /
+ * Dashboard - Edit Post
+ */
+module.exports.get_edit_post = async(req ,res) => {
+	try {
+
+		const locals = {
+			title: "Edit Post",
+			description: "Free NodeJs User Management" 
+		};
+		const data = await Post.findOne({ _id: req.params.id });
+		
+		res.render('admin/edit-post', {
+			locals,
+			data,
+			layout: adminLayout
+		});
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+/**
+ * PUT /
+ * Dashboard - Edit Post
+ */
+
+module.exports.put_edit_post = async(req, res) => {
+	try {
+		await Post.findByIdAndUpdate(req.params.id, {
+			title: req.body.title,
+			body: req.body.body,
+			updatedAt: Date.now()
+		});
+		res.redirect(`/edit-post/${req.params.id}`);
+	} catch (error) {
+		console.log(error);
+	}
+};
