@@ -26,7 +26,7 @@ module.exports.get_dashboard = async(req, res) => {
 };
 
 /**
- * GET
+ * GET /
  * Admin - Create New Post
  */
 
@@ -36,8 +36,29 @@ module.exports.get_add_post = (req, res) => {
 			title: "Add Post",
 			description: "Simple Blog Created with Nodejs, express & MongoDb"
 		}
+		res.render('admin/add-post', {
+			locals,
+			layout: adminLayout
+		})
 
+	} catch (error) {
+		console.log(error);
+	}
+};
 
+/**
+ * POST /
+ * Dashboard - Create New Post
+ */
+
+module.exports.post_add_post = async(req, res) => {
+	try {
+		const newPost = await new Post({
+			title: req.body.title,
+			body: req.body.body
+		});
+		await Post.create(newPost);
+		res.redirect('dashboard');
 	} catch (error) {
 		console.log(error);
 	}
