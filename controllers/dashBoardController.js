@@ -58,7 +58,7 @@ module.exports.post_add_post = async(req, res) => {
 			body: req.body.body
 		});
 		await Post.create(newPost);
-		res.redirect('dashboard');
+		res.redirect('/dashboard');
 	} catch (error) {
 		console.log(error);
 	}
@@ -104,3 +104,19 @@ module.exports.put_edit_post = async(req, res) => {
 		console.log(error);
 	}
 };
+
+/**
+ * DELETE /
+ * Dashboard - Delete Post
+ */
+
+module.exports.delete_post = async(req, res) => {
+
+	try {
+		await Post.deleteOne({ _id: req.params.id});
+
+		res.redirect('/dashboard');
+	} catch (error) {
+		console.log(error);
+	}
+}
